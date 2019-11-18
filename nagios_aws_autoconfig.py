@@ -20,7 +20,7 @@ class Service:
 def populate_instance_dictionary(conn, instance_dictionary):
     '''accepts an ec2 interface and instance_dictionary variable - populates
     the instance_dictionary variable'''
-    reservation_list = conn.get_all_instances()
+    reservation_list = conn.get_all_instances(filters={"tag:Environment" :"Test" })
     for current_reservation in reservation_list:
         for instance in current_reservation.instances:
         #only want running instances
@@ -35,14 +35,14 @@ def populate_nrpe(instance_dictionary, service_dictionary):
         if 'Name' in instance_dictionary[instance].tags:
             instance_dictionary_csv += instance_dictionary[instance].tags.get('Name').encode('utf-8') + ','
             instance_dictionary_csv_trim = instance_dictionary_csv[:-1]
-            service_dictionary['nrpe_disk_space'] = Service('nrpe_disk_space',
-                instance_dictionary_csv_trim, 'check_nrpe!check_disk_space!10%20% /')
-            service_dictionary['nrpe_disk_inode'] = Service('nrpe_disk_inode',
-                instance_dictionary_csv_trim, 'check_nrpe!check_disk_inode!10%20% /')
-            service_dictionary['nrpe_cpu_load'] = Service('nrpe_cpu_load',
-                instance_dictionary_csv_trim, 'check_nrpe!check_cpu_load!30,25,2015,10,5')
-            service_dictionary['nrpe_mem_swap'] = Service('nrpe_mem_swap',
-                instance_dictionary_csv_trim, 'check_nrpe!check_mem_swap!80%90%')
+             service_dictionary['check_load'] = Service('check_load',
+                instance_dictionary_csv_trim, 'check_nrpe!check_load')
+            service_dictionary['check_total_procs'] = Service('check_total_procs',
+                instance_dictionary_csv_trim, 'check_nrpe!check_total_procs')
+            service_dictionary['check_users'] = Service('check_users',
+                instance_dictionary_csv_trim, 'check_nrpe!check_users')
+            service_dictionary['check_ftp'] = Service('check_ftp',
+                instance_dictionary_csv_trim, 'check_nrpe!check_ftp')
 
 
 def populate_service_dictionary(instance_dictionary, service_dictionary):
