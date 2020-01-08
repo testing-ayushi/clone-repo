@@ -35,7 +35,7 @@ def populate_nrpe(instance_dictionary, service_dictionary):
         if 'Name' in instance_dictionary[instance].tags:
             instance_dictionary_csv += instance_dictionary[instance].tags.get('Name').encode('utf-8') + ','
             instance_dictionary_csv_trim = instance_dictionary_csv[:-1]
-             service_dictionary['check_load'] = Service('check_load',
+            service_dictionary['check_load'] = Service('check_load',
                 instance_dictionary_csv_trim, 'check_nrpe!check_load')
             service_dictionary['check_total_procs'] = Service('check_total_procs',
                 instance_dictionary_csv_trim, 'check_nrpe!check_total_procs')
