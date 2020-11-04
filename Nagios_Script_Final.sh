@@ -4,7 +4,7 @@
 #check current user by whoami
 #check sudo privileges by sudo -v
 #sed -i '/dont_blame_nrpe/c\dont_blame_nrpe=1' /usr/local/nagios/etc/nrpe.cfg
-
+#Testing merge conflict
 nagiosPlugin()
 {
 	#install Plugins
