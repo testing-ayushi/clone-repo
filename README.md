@@ -18,4 +18,6 @@ The nagios-aws-autoconfig tool will automatically create nagios configuration fi
 # Example Use (with Options):
 
 
-    nagios_aws_autoconfig.py --nagios-config-dir /my/nagios/configs --region us-west-1
+Test Changes
+
+nagios_aws_autoconfig.py --nagios-config-dir /my/nagios/configs --region us-west-1
